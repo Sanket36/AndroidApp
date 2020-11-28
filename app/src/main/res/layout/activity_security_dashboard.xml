@@ -5,7 +5,6 @@
     android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity"
     tools:layout_editor_absoluteY="25dp" >
 
     <GridLayout
@@ -27,6 +26,7 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
+            android:id="@+id/addVisitor"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
+                    android:text="Add Visitor"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     android:gravity="center_horizontal" />
@@ -59,6 +59,7 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
+            android:id="@+id/showVisitor"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
+                    android:text="Show Visitor"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     android:gravity="center_horizontal" />

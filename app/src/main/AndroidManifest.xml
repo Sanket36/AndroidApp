@@ -3,6 +3,8 @@
     package="com.example.securehomes">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SecureHomes">
-        <activity android:name=".OwnerDashboard"></activity>
+        <activity android:name=".visiter_details"></activity>
+        <activity android:name=".ShowVisitors" />
+        <activity android:name=".addVisitor" />
+        <activity android:name=".OwnerDashboard" />
         <activity android:name=".SecurityDashboard" />
-        <activity android:name=".DashboardActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".MainActivity"

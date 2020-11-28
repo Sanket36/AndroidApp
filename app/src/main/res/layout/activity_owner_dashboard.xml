@@ -5,7 +5,6 @@
     android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity"
     tools:layout_editor_absoluteY="25dp" >
 
     <GridLayout
@@ -59,6 +58,7 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
+
             >
             <LinearLayout
                 android:layout_width="wrap_content"

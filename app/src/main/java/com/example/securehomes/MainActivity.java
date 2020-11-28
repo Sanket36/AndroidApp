@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
             finish();
         }
-        else {
-            Intent mainIntent = new Intent(MainActivity.this,DashboardActivity.class);
-            startActivity(mainIntent);
-            finish();
+        else{
+            //TODO Delete this part later
+            startActivity(new Intent(getApplicationContext(),SecurityDashboard.class));
+            //
         }
+
     }
 }
