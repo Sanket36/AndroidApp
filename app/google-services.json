@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "240233968139",
+    "firebase_url": "https://homes-2387a.firebaseio.com",
+    "project_id": "homes-2387a",
+    "storage_bucket": "homes-2387a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240233968139:android:13dfd8b8c577147b9d8d0e",
+        "android_client_info": {
+          "package_name": "com.example.securehomes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240233968139-tmm2a5ohk9arokunsame691l854oq0f0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXUWRxAuwTIOaDVZxscLjo1DpQ9fJz3Ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240233968139-tmm2a5ohk9arokunsame691l854oq0f0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
