@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,8 +46,8 @@ public class addVisitor extends AppCompatActivity {
     AutoCompleteTextView txtVehicle,txtName,txtPurpose,txtFlatNum,txtTelNum;
     ImageView showPic;
     Uri image_uri;
-    StorageReference mStorageRef;
-    DatabaseReference mDatabaseRef;
+    //StorageReference mStorageRef;
+    //DatabaseReference mDatabaseRef;
     Visitor visitor;
     UploadTask uploadTask;
 
@@ -62,31 +63,14 @@ public class addVisitor extends AppCompatActivity {
         txtVehicle = (AutoCompleteTextView) findViewById(R.id.vehicle_no);
         txtFlatNum = (AutoCompleteTextView) findViewById(R.id.txtownerFlatNumber);
         txtTelNum = (AutoCompleteTextView) findViewById(R.id.visitor_telnum);
-        //btnShowVisitors=(Button) findViewById(R.id.showVisitors);
-
-
-        mStorageRef = FirebaseStorage.getInstance().getReference("Images");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Visitor");
-        visitor = new Visitor();
-
-        //
-        /*btnShowVisitors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent VisitorLog = new Intent(MainActivity.this, ShowVisitors.class)
-                        .putExtra("maxId",maxId);
-                startActivity(VisitorLog);
-            }
-        });*/
-        //
 
         btnAddVisitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FileUploader();
-                FormUploader();
+                //FormUploader();
 
-                Toast.makeText(addVisitor.this, "Visitor Added Successfully", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(addVisitor.this, "Visitor Added Successfully", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -117,25 +101,6 @@ public class addVisitor extends AppCompatActivity {
 
     }
 
-    private void FormUploader() {
-        String name = txtName.getText().toString().trim();
-        String purpose = txtPurpose.getText().toString().trim();
-        String vehicle = txtVehicle.getText().toString().trim();
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-        String toFlatNo =  txtFlatNum.getText().toString().trim();
-        String imageId = System.currentTimeMillis()+"."+getExtension(image_uri);
-        String phone = txtTelNum.getText().toString().trim();
-
-        visitor.setName(name);
-        visitor.setPurpose(purpose);
-        visitor.setVehicle_no(vehicle);
-        visitor.setTime(timeStamp);
-        visitor.setToFlatNumber(toFlatNo);
-        visitor.setImageId(imageId);
-        visitor.setTelNum(phone);
-        mDatabaseRef.push().setValue(visitor);
-    }
-
     private String getExtension(Uri uri){
         ContentResolver cr = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
@@ -148,13 +113,29 @@ public class addVisitor extends AppCompatActivity {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setTitle("File Uploader");
         dialog.show();
+
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("Images");
+        final DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        visitor = new Visitor();
+
         StorageReference Ref = mStorageRef.child(imageId);
 
         uploadTask = (UploadTask) Ref.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 dialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Image Uploaded successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Visitor Added Successfully",Toast.LENGTH_SHORT).show();
+                //
+                Task<Uri> downloadURL = Ref.getDownloadUrl();
+                downloadURL.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String imageReference = uri.toString();
+                        mDatabaseRef.child("Visitor").child(visitor.getKey()).child("imageURL").setValue(imageReference);
+                        visitor.setImageURL(imageReference);
+                    }
+                });
+                //
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -164,22 +145,30 @@ public class addVisitor extends AppCompatActivity {
             }
         });
 
-        /*Ref.putFile(image_uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Toast.makeText(addVisitor.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                    }
-                });*/
+       //
+        String name = txtName.getText().toString().trim();
+        String purpose = txtPurpose.getText().toString().trim();
+        String vehicle = txtVehicle.getText().toString().trim();
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String toFlatNo =  txtFlatNum.getText().toString().trim();
+        String phone = txtTelNum.getText().toString().trim();
+
+        visitor.setName(name);
+        visitor.setPurpose(purpose);
+        visitor.setVehicle_no(vehicle);
+        visitor.setTime(timeStamp);
+        visitor.setToFlatNumber(toFlatNo);
+        visitor.setTelNum(phone);
+        visitor.setImageURL("");
+
+        DatabaseReference VisitorRef= mDatabaseRef.child("Visitor").push();
+        VisitorRef.setValue(visitor);
+        // update this visitor with its key
+        String key=VisitorRef.getKey();
+        visitor.setKey(key);
+
+
+        //
     }
 
 

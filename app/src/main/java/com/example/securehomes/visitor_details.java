@@ -3,11 +3,16 @@ package com.example.securehomes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class visitor_details extends AppCompatActivity {
@@ -46,6 +51,8 @@ public class visitor_details extends AppCompatActivity {
         String vehicleNum = vis.getVehicle_no();
         String telNum = vis.getTelNum();
         String toFlatNum = vis.getToFlatNumber();
+        
+
 
         txtName.setText(name);
         txtPurpose.setText(purpose);
@@ -55,5 +62,8 @@ public class visitor_details extends AppCompatActivity {
         txtToFlatNum.setText(toFlatNum);
 
 
+
     }
+
+
 }

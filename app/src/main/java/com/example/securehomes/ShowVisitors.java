@@ -34,14 +34,6 @@ public class ShowVisitors extends AppCompatActivity {
 
     public  ArrayList<Visitor> getVisitors(){
         ArrayList<Visitor> visList = new ArrayList<>();
-        //visList.add(new Visitor("Prasad", "Family Function", R.mipmap.ic_launcher));
-        //visList.add(new Visitor("Yogita", "Birthday Party", R.mipmap.ic_launcher));
-        //visList.add(new Visitor("Sanket", "Family Function", R.mipmap.ic_launcher));
-        /*visList.add(new Visitor("User1", "Family Function", R.mipmap.ic_launcher));
-        visList.add(new Visitor("User2", "Looking for flat", R.mipmap.ic_launcher));
-        visList.add(new Visitor("User3", "Birthday Party", R.mipmap.ic_launcher));
-        visList.add(new Visitor("User4", "Friends", R.mipmap.ic_launcher));
-        visList.add(new Visitor("User5", "Birthday Party", R.mipmap.ic_launcher));*/
 
             dbRef = FirebaseDatabase.getInstance().getReference("Visitor");
             dbRef.addValueEventListener(new ValueEventListener() {
@@ -53,18 +45,6 @@ public class ShowVisitors extends AppCompatActivity {
                         visList.add(visitor);
                         adapter.notifyDataSetChanged();
                     }
-
-                    /*String name = snapshot.child("name").getValue().toString();
-                    String purpose = snapshot.child("purpose").getValue().toString();
-                    String telnum = snapshot.child("telNum").getValue().toString();
-                    String time = snapshot.child("time").getValue().toString();
-                    String vehicle = snapshot.child("vehicle_no").getValue().toString();
-                    String toFlatNum = snapshot.child("toFlatNumber").getValue().toString();
-
-                    //Visitor(String name, String purpose, String vehicle_no, String time, String telNum, String toFlatNumber)
-                    Visitor v = new Visitor(name,purpose,vehicle,time,telnum,toFlatNum);
-                    visList.add(v);
-                    adapter.notifyDataSetChanged();*/
                 }
 
                 @Override
@@ -90,18 +70,10 @@ public class ShowVisitors extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                //Intent perDetails = new Intent(ShowVisitors.this, visitor_details.class);
-                //perDetails.putExtra("Example Item", (Parcelable) visList.get(position));
-                //startActivity(perDetails);
-
                 Toast.makeText(ShowVisitors.this, "Clicked at position: "+position, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),visitor_details.class)
                         .putExtra("visitorList", visList)
                         .putExtra("pos",position));
-                //Toast.makeText(ShowVisitors.this, "Clicked at position: "+position, Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(getApplicationContext(),visitor_details.class));
-
-
             }
         });
 

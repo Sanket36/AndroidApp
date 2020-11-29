@@ -7,9 +7,9 @@ public class Visitor implements Serializable {
     private String time;
     private String  telNum;
     private String toFlatNumber;
-    private String imageId;
+    //private String imageId;
     private int img;
-    String imageURL;
+    private String imageURL,key;
 
     public Visitor() {
     }
@@ -29,20 +29,28 @@ public class Visitor implements Serializable {
         this.toFlatNumber = toFlatNumber;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public String getTelNum() {
         return telNum;
     }
 
     public void setTelNum(String telNum) {
         this.telNum = telNum;
-    }
-
-    public String getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
     }
 
     public String getToFlatNumber() {
