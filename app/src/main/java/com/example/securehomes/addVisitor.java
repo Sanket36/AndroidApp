@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -45,8 +47,8 @@ public class addVisitor extends AppCompatActivity {
     Uri image_uri;
     StorageReference mStorageRef;
     DatabaseReference mDatabaseRef;
-    long maxId;
     Visitor visitor;
+    UploadTask uploadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,19 +114,7 @@ public class addVisitor extends AppCompatActivity {
             }
         });
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    maxId=snapshot.getChildrenCount();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     private void FormUploader() {
@@ -143,7 +133,7 @@ public class addVisitor extends AppCompatActivity {
         visitor.setToFlatNumber(toFlatNo);
         visitor.setImageId(imageId);
         visitor.setTelNum(phone);
-        mDatabaseRef.child(String.valueOf(maxId)).setValue(visitor);
+        mDatabaseRef.push().setValue(visitor);
     }
 
     private String getExtension(Uri uri){
@@ -155,9 +145,26 @@ public class addVisitor extends AppCompatActivity {
     private void FileUploader() {
         String imageId;
         imageId = System.currentTimeMillis()+"."+getExtension(image_uri);
-
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setTitle("File Uploader");
+        dialog.show();
         StorageReference Ref = mStorageRef.child(imageId);
-        Ref.putFile(image_uri)
+
+        uploadTask = (UploadTask) Ref.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(),"Image Uploaded successfully",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                float percent = (100*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                dialog.setMessage("Uploaded :"+(int)percent+"%");
+            }
+        });
+
+        /*Ref.putFile(image_uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -172,7 +179,7 @@ public class addVisitor extends AppCompatActivity {
                         // Handle unsuccessful uploads
                         // ...
                     }
-                });
+                });*/
     }
 
 

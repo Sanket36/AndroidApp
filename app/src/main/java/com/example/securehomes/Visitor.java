@@ -9,6 +9,7 @@ public class Visitor implements Serializable {
     private String toFlatNumber;
     private String imageId;
     private int img;
+    String imageURL;
 
     public Visitor() {
     }

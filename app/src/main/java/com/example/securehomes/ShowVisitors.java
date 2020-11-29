@@ -22,29 +22,14 @@ import java.util.ArrayList;
 
 public class ShowVisitors extends AppCompatActivity {
     DatabaseReference dbRef;
-    long maxId;
     VisitorArrayAdapter adapter;
-    DatabaseReference mDatabaseRef;
+    Visitor visitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_visitors);
-
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Visitor");
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    maxId=snapshot.getChildrenCount();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        visitor = new Visitor();
     }
 
     public  ArrayList<Visitor> getVisitors(){
@@ -58,13 +43,18 @@ public class ShowVisitors extends AppCompatActivity {
         visList.add(new Visitor("User4", "Friends", R.mipmap.ic_launcher));
         visList.add(new Visitor("User5", "Birthday Party", R.mipmap.ic_launcher));*/
 
-        for(int i=0;i<maxId;i++){
-            dbRef = FirebaseDatabase.getInstance().getReference("Visitor").child(String.valueOf(i));
+            dbRef = FirebaseDatabase.getInstance().getReference("Visitor");
             dbRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    String name = snapshot.child("name").getValue().toString();
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        visitor = ds.getValue(Visitor.class);
+                        visList.add(visitor);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    /*String name = snapshot.child("name").getValue().toString();
                     String purpose = snapshot.child("purpose").getValue().toString();
                     String telnum = snapshot.child("telNum").getValue().toString();
                     String time = snapshot.child("time").getValue().toString();
@@ -74,7 +64,7 @@ public class ShowVisitors extends AppCompatActivity {
                     //Visitor(String name, String purpose, String vehicle_no, String time, String telNum, String toFlatNumber)
                     Visitor v = new Visitor(name,purpose,vehicle,time,telnum,toFlatNum);
                     visList.add(v);
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();*/
                 }
 
                 @Override
@@ -82,7 +72,7 @@ public class ShowVisitors extends AppCompatActivity {
 
                 }
             });
-        }
+
 
         return visList;
     }
