@@ -30,6 +30,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -48,7 +53,8 @@ public class SignInFragment extends Fragment {
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore db;
+    private DatabaseReference firebaseDatabase;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +71,7 @@ public class SignInFragment extends Fragment {
         radioGroup = view.findViewById(R.id.sign_in_radio_group);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users");
         return view;
     }
 
@@ -156,26 +162,23 @@ public class SignInFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    db.collection("USERS").document(firebaseAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            if(task.isSuccessful()){
-                                                DocumentSnapshot documentSnapshot = task.getResult();
-                                                if(documentSnapshot.exists()){
-                                                    Log.i("type",documentSnapshot.get("type").toString());
-                                                    if(documentSnapshot.get("type").toString().equals(radioButton.getText().toString())){
-                                                        if(radioButton.getText().toString().equals("Owner")) {
+
+                                    firebaseDatabase.child(firebaseAuth.getCurrentUser().getUid())
+                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    Log.i("object", String.valueOf(snapshot));
+                                                    if(snapshot.child("type").getValue().toString().equals(radioButton.getText().toString())) {
+                                                        if(snapshot.child("type").getValue().toString().equals("Owner")) {
                                                             Intent mainIntent = new Intent(getActivity(), OwnerDashboard.class);
                                                             startActivity(mainIntent);
                                                             getActivity().finish();
-                                                        }
-                                                        else {
+                                                        } else {
                                                             Intent mainIntent = new Intent(getActivity(), SecurityDashboard.class);
                                                             startActivity(mainIntent);
                                                             getActivity().finish();
                                                         }
-                                                    }
-                                                    else{
+                                                    } else{
                                                         progressBar.setVisibility(View.INVISIBLE);
                                                         signinBtn.setEnabled(true);
                                                         signinBtn.setTextColor(Color.rgb(255,255,255));
@@ -183,23 +186,12 @@ public class SignInFragment extends Fragment {
                                                         Toast.makeText(getActivity(),"No Such User",Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
-                                                else{
-                                                    progressBar.setVisibility(View.INVISIBLE);
-                                                    signinBtn.setEnabled(true);
-                                                    signinBtn.setTextColor(Color.rgb(255,255,255));
-                                                    FirebaseAuth.getInstance().signOut();
-                                                    Toast.makeText(getActivity(),"No Such User",Toast.LENGTH_SHORT).show();
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
                                                 }
-                                            }
-                                            else{
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                signinBtn.setEnabled(true);
-                                                signinBtn.setTextColor(Color.rgb(255,255,255));
-                                                FirebaseAuth.getInstance().signOut();
-                                                Toast.makeText(getActivity(),"Failed",Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
+                                            });
                                 }else{
                                     progressBar.setVisibility(View.INVISIBLE);
                                     signinBtn.setEnabled(true);

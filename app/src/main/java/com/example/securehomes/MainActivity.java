@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else {
-            Intent mainIntent = new Intent(MainActivity.this,DashboardActivity.class);
+            firebaseAuth.getCurrentUser().getUid();
+
+            Intent mainIntent = new Intent(MainActivity.this,OwnerDashboard.class);
             startActivity(mainIntent);
             finish();
         }

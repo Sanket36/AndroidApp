@@ -29,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -48,12 +50,14 @@ public class SignUpFragment extends Fragment {
     private EditText fullName;
     private EditText password;
     private EditText confirmPassword;
+    private EditText phoneNo;
+    private EditText flatNo;
     private Button signupBtn;
     private ProgressBar progressBar;
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firebaseFirestore;
+    private DatabaseReference firebaseDatabase;
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
+    private RadioButton radioButton,ownerRadio;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,18 +71,34 @@ public class SignUpFragment extends Fragment {
         fullName = view.findViewById(R.id.sign_up_fullname);
         password = view.findViewById(R.id.sign_up_password);
         confirmPassword = view.findViewById(R.id.sign_up_confirmpass);
+        phoneNo = view.findViewById(R.id.phoneNo);
+        flatNo = view.findViewById(R.id.flatNo);
         progressBar = view.findViewById(R.id.progressBar);
         signupBtn = view.findViewById(R.id.sign_up_button);
         radioGroup = view.findViewById(R.id.sign_up_radio_group);
+        ownerRadio = view.findViewById(R.id.sign_in_radio_owner);
 
         firebaseAuth =FirebaseAuth.getInstance();
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users");
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.sign_in_radio_owner){
+                    flatNo.setVisibility(View.VISIBLE);
+                } else {
+                    flatNo.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
         alreadyhaveaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,27 +186,32 @@ public class SignUpFragment extends Fragment {
         fragmentTransaction.commit();
     }
     private void checkinputs(){
-        if (!TextUtils.isEmpty(email.getText().toString())){
-            if(!TextUtils.isEmpty(fullName.getText().toString())){
-                if(!TextUtils.isEmpty(password.getText().toString()) && password.length() >= 8){
-                    if(!TextUtils.isEmpty(confirmPassword.getText().toString())){
-                        signupBtn.setEnabled(true);
-                        signupBtn.setTextColor(getResources().getColor(R.color.accent));
-                    }else{
+        if (!TextUtils.isEmpty(email.getText().toString())) {
+            if (!TextUtils.isEmpty(fullName.getText().toString())) {
+                if (!TextUtils.isEmpty(phoneNo.getText().toString())) {
+                    if (!TextUtils.isEmpty(password.getText().toString()) && password.length() >= 8) {
+                        if (!TextUtils.isEmpty(confirmPassword.getText().toString())) {
+                            signupBtn.setEnabled(true);
+                            signupBtn.setTextColor(getResources().getColor(R.color.accent));
+                        } else {
+                            signupBtn.setEnabled(false);
+                            signupBtn.setTextColor(Color.argb(50, 255, 255, 255));
+                        }
+                    } else {
                         signupBtn.setEnabled(false);
-                        signupBtn.setTextColor(Color.argb(50,255,255,255));
+                        signupBtn.setTextColor(Color.argb(50, 255, 255, 255));
                     }
-                }else{
+                } else {
                     signupBtn.setEnabled(false);
-                    signupBtn.setTextColor(Color.argb(50,255,255,255));
+                    signupBtn.setTextColor(Color.argb(50, 255, 255, 255));
                 }
-            }else{
+            } else {
                 signupBtn.setEnabled(false);
-                signupBtn.setTextColor(Color.argb(50,255,255,255));
+                signupBtn.setTextColor(Color.argb(50, 255, 255, 255));
             }
-        }else{
+        } else {
             signupBtn.setEnabled(false);
-            signupBtn.setTextColor(Color.argb(50,255,255,255));
+            signupBtn.setTextColor(Color.argb(50, 255, 255, 255));
         }
     }
     private void checkemailandpassword(){
@@ -207,9 +232,14 @@ public class SignUpFragment extends Fragment {
                             radioButton = getActivity().findViewById(radioInt);
                             Map<Object,String> userdata = new HashMap<>();
                             userdata.put("UID",firebaseAuth.getCurrentUser().getUid());
+                            userdata.put("email",email.getText().toString());
                             userdata.put("fullname",fullName.getText().toString());
+                            userdata.put("phone",phoneNo.getText().toString());
                             userdata.put("type",radioButton.getText().toString());
-                            firebaseFirestore.collection("USERS").document(firebaseAuth.getCurrentUser().getUid()).set(userdata)
+                            if(radioButton.getText().toString().equals("Owner")){
+                                userdata.put("flatNo",flatNo.getText().toString());
+                            }
+                            firebaseDatabase.child(firebaseAuth.getCurrentUser().getUid()).setValue(userdata)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

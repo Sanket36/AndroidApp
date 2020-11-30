@@ -13,7 +13,6 @@
         android:theme="@style/Theme.SecureHomes">
         <activity android:name=".OwnerDashboard"></activity>
         <activity android:name=".SecurityDashboard" />
-        <activity android:name=".DashboardActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".MainActivity"
