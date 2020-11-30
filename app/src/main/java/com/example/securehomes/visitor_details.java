@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -51,6 +53,18 @@ public class visitor_details extends AppCompatActivity {
         String vehicleNum = vis.getVehicle_no();
         String telNum = vis.getTelNum();
         String toFlatNum = vis.getToFlatNumber();
+
+        //
+        //Glide.with(this).load(vis.getImageURL()).into(imageView);
+        Glide.with(this)
+                .load(vis.getImageURL())
+                .into(imageView);
+        //URL url = new URL(vis.getImageURL());
+        //ImageView imageView = findViewById(R.id.imageView);
+        //Glide.with(this)
+        //       .load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
+         //       .into(imageView);
+        //
         
 
 

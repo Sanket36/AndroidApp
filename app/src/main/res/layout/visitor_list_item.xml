@@ -18,7 +18,7 @@
         android:id="@+id/imgView"
         android:layout_width="88dp"
         android:layout_height="88dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_baseline_image_24"
         android:layout_marginTop="10dp"/>
 
     <LinearLayout

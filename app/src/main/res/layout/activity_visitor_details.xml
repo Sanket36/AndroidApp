@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_launcher"
+
         />
 
     <TextView

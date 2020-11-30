@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,12 @@ public class VisitorArrayAdapter extends ArrayAdapter<Visitor> {
         Status.setText(CurrentVisitor.getPurpose());
 
         ImageView img = (ImageView) listView.findViewById(R.id.imgView);
+        Glide.with(getContext())
+                .load(CurrentVisitor.getImageURL())
+                .into(img);
+        //Glide.with(getContext())
+                //.load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
+                //.into(img);
 
 
         return listView;
