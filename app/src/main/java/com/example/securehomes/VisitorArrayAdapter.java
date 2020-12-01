@@ -45,8 +45,8 @@ public class VisitorArrayAdapter extends ArrayAdapter<Visitor> {
                 .load(CurrentVisitor.getImageURL())
                 .into(img);
         //Glide.with(getContext())
-                //.load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
-                //.into(img);
+        //.load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
+        //.into(img);
 
 
         return listView;

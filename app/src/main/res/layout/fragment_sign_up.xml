@@ -29,7 +29,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.055" />
+            app:layout_constraintVertical_bias="0.014" />
 
         <EditText
             android:id="@+id/sign_up_email"
@@ -114,13 +114,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="104dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.245"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_confirmpass">
 
@@ -163,7 +163,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_confirmpass"
-            app:layout_constraintVertical_bias="0.316" />
+            app:layout_constraintVertical_bias="0.529" />
 
         <TextView
             android:id="@+id/textView"
@@ -185,7 +185,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="56dp"
+            android:layout_marginBottom="28dp"
             android:text="Already have an account? Sign In!"
             android:textColor="@color/accent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -230,6 +230,44 @@
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/phoneNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="#70ffffff"
+            android:ems="10"
+            android:hint="Phone No."
+            android:inputType="phone"
+            android:textColor="@color/accent"
+            android:textColorHint="#70ffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_confirmpass" />
+
+        <EditText
+            android:id="@+id/flatNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:ems="10"
+            android:backgroundTint="#70ffffff"
+            android:hint="Flat No."
+            android:visibility="visible"
+            android:textColor="@color/accent"
+            android:textColorHint="#70ffffff"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

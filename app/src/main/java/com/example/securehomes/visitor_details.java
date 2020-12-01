@@ -54,19 +54,9 @@ public class visitor_details extends AppCompatActivity {
         String telNum = vis.getTelNum();
         String toFlatNum = vis.getToFlatNumber();
 
-        //
-        //Glide.with(this).load(vis.getImageURL()).into(imageView);
         Glide.with(this)
                 .load(vis.getImageURL())
                 .into(imageView);
-        //URL url = new URL(vis.getImageURL());
-        //ImageView imageView = findViewById(R.id.imageView);
-        //Glide.with(this)
-        //       .load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
-         //       .into(imageView);
-        //
-        
-
 
         txtName.setText(name);
         txtPurpose.setText(purpose);

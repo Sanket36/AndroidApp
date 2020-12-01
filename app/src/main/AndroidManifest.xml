@@ -3,20 +3,25 @@
     package="com.example.securehomes">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-feature android:name="android.hardware.camera" />
+
     <application
+        android:name=".SecureHomes"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SecureHomes">
+        android:theme="@style/AppTheme">
         <activity android:name=".visitor_details"></activity>
         <activity android:name=".ShowVisitors" />
         <activity android:name=".addVisitor" />
         <activity android:name=".OwnerDashboard" />
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".SecurityDashboard" />
         <activity android:name=".RegisterActivity" />
         <activity
@@ -27,6 +32,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".GuestHistoryWrapper"
+            android:label="Visitors History"
+            android:parentActivityName=".OwnerDashboard"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OwnerDashboard" />
+        </activity>
+        <activity
+            android:name=".Profile"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
         </activity>
     </application>
 

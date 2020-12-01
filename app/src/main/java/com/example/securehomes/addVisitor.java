@@ -118,7 +118,7 @@ public class addVisitor extends AppCompatActivity {
         final DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         visitor = new Visitor();
 
-        StorageReference Ref = mStorageRef.child(imageId);
+        final StorageReference Ref = mStorageRef.child(imageId);
 
         uploadTask = (UploadTask) Ref.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -145,7 +145,7 @@ public class addVisitor extends AppCompatActivity {
             }
         });
 
-       //
+        //
         String name = txtName.getText().toString().trim();
         String purpose = txtPurpose.getText().toString().trim();
         String vehicle = txtVehicle.getText().toString().trim();

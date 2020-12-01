@@ -1,13 +1,21 @@
 package com.example.securehomes;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -15,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.activity_main);
@@ -31,11 +40,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
             finish();
         }
-        else{
-            //TODO Delete this part later
-            startActivity(new Intent(getApplicationContext(),SecurityDashboard.class));
-            //
-        }
+        else {
+            firebaseAuth.getCurrentUser().getUid();
 
+            Intent mainIntent = new Intent(MainActivity.this,SecurityDashboard.class);
+            startActivity(mainIntent);
+            finish();
+        }
     }
 }

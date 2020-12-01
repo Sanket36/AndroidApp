@@ -5,6 +5,7 @@
     android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".DashboardActivity"
     tools:layout_editor_absoluteY="25dp" >
 
     <GridLayout
@@ -16,6 +17,7 @@
         android:rowCount="3" >
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -48,6 +50,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/visHis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -58,7 +61,6 @@
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
-
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -73,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home"
+                    android:text="Visitors History"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     android:gravity="center_horizontal" />

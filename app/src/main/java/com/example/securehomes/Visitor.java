@@ -9,7 +9,7 @@ public class Visitor implements Serializable {
     private String toFlatNumber;
     //private String imageId;
     private int img;
-    private String imageURL,key;
+    private String imageURL,key,status;
 
     public Visitor() {
     }
@@ -28,7 +28,15 @@ public class Visitor implements Serializable {
         this.telNum = telNum;
         this.toFlatNumber = toFlatNumber;
     }
-
+    public Visitor(String name, String purpose, String vehicle_no, String time, String telNum, String toFlatNumber,String imageURL) {
+        this.name = name;
+        this.purpose = purpose;
+        this.Vehicle_no = vehicle_no;
+        this.time = time;
+        this.telNum = telNum;
+        this.toFlatNumber = toFlatNumber;
+        this.imageURL = imageURL;
+    }
     public String getImageURL() {
         return imageURL;
     }
@@ -43,6 +51,14 @@ public class Visitor implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTelNum() {

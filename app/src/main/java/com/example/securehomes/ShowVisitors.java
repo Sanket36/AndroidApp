@@ -33,25 +33,25 @@ public class ShowVisitors extends AppCompatActivity {
     }
 
     public  ArrayList<Visitor> getVisitors(){
-        ArrayList<Visitor> visList = new ArrayList<>();
+        final ArrayList<Visitor> visList = new ArrayList<>();
 
-            dbRef = FirebaseDatabase.getInstance().getReference("Visitor");
-            dbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+        dbRef = FirebaseDatabase.getInstance().getReference("Visitor");
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    for(DataSnapshot ds : snapshot.getChildren()){
-                        visitor = ds.getValue(Visitor.class);
-                        visList.add(visitor);
-                        adapter.notifyDataSetChanged();
-                    }
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    visitor = ds.getValue(Visitor.class);
+                    visList.add(visitor);
+                    adapter.notifyDataSetChanged();
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+            }
+        });
 
 
         return visList;
