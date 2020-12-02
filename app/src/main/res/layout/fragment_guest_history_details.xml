@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GuestHistoryDetailsFragment"
+    android:background="#0DBAB8B8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+      <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          app:cardBackgroundColor="#5590AA"
+          android:elevation="12dp">
+
+          <ImageView
+              android:id="@+id/imgView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:scaleType="centerCrop"/>
+
+      </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardCornerRadius="10dp"
+            android:elevation="12dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               >
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Yogita Magar"
+                    android:textColor="#352B2A"
+                    android:textSize="32sp"
+                    android:gravity="center_horizontal"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phone"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/name"
+                    android:textColor="#352B2A"
+                    android:text="885684970"/>
+
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:elevation="12dp"-->
+<!--                    app:cardUseCompatPadding="true">-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="16dp">-->
+<!--                <TextView-->
+<!--                    android:id="@+id/ArrDate"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="22/12/20"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#2D7530"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/ArrTime"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/ArrDate"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:text="05:10"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#2D7530"/>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/DepDate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="22/12/20"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/red"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/DepTime"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/DepDate"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="06:10"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/red"/>-->
+<!--                    </RelativeLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:elevation="12dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Arrival Date : "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#352B2A"/>
+                <TextView
+                    android:id="@+id/TimeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#352B2A"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:elevation="12dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle No : "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#352B2A"/>
+                <TextView
+                    android:id="@+id/vehTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="424007"
+                    android:textSize="18sp"
+                    android:textColor="#352B2A"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:elevation="12dp"
+            app:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purpose : "
+                android:textSize="20sp"
+                android:textColor="#352B2A"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/purpose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Family Function"
+                android:textSize="18sp"
+                android:textColor="#352B2A"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/Call"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:layout_gravity="right"
+            android:text="Call"
+            android:textColor="#FDF7F7"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawableTint="#F8F5F5"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:background="@drawable/call_button"
+            />
+    </LinearLayout>
+
+</FrameLayout>
