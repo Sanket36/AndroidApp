@@ -39,4 +39,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!-- Background color of buttons in the app -->
     </style>
+    <style name="FragTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary theme color of the app (sets background color of app bar) -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- Background color of buttons in the app -->
+    </style>
 </resources>
